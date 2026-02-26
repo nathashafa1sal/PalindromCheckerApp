@@ -1,44 +1,36 @@
 //version 4.0
 //author Nathasha
-//useCase 4: CharacterArray
-
+//useCase 5: Stackbased
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
-    public static boolean isPalindromeUsingCharArray(String input) {
-        // Convert string to character array
-        char[] characters = input.toCharArray();
-
-        int start = 0;
-        int end = characters.length - 1;
-
-        // Two-pointer comparison
-        while (start < end) {
-            if (characters[start] != characters[end]) {
-                return false; // Mismatch found
-            }
-            start++;
-            end--;
-        }
-
-        return true; // All characters matched
-    }
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
+        Scanner sc = new Scanner(System.in);
+        Stack<Character> stack = new Stack<>();
 
         System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
+        String input = sc.nextLine();
 
-        boolean result = isPalindromeUsingCharArray(input);
+        String processedInput = input.toLowerCase();
 
-        if (result) {
-            System.out.println("The string is a palindrome.");
-        } else {
-            System.out.println("The string is NOT a palindrome.");
+
+        for (int i = 0; i < processedInput.length(); i++) {
+            stack.push(processedInput.charAt(i));
         }
 
-        scanner.close();
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+        if (processedInput.equals(reversed)) {
+            System.out.println("The string is a Palindrome.");
+        } else {
+            System.out.println("The string is NOT a Palindrome.");
+        }
+
+        sc.close();
     }
 }
